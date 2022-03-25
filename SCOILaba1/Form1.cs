@@ -157,5 +157,12 @@ namespace SCOILaba1
             }
                 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            GradPr gradPr = new GradPr();
+            gradPr.Show();
+            this.Hide();
+        }
     }
 }

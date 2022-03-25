@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCOILaba1.Structures;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -244,5 +245,37 @@ namespace SCOILaba1.Handeling
 
             img.UnlockBits(data);  //разблокируем изображение
         }
+
+        public static Point ConvertCoordToPoint(int x,int y)
+        {
+            return new Point(x*2,Math.Abs(y-255)*2);
+        }
+
+        
+        public static void DrawCircle(this Graphics g, Circle circle)
+        {
+            g.DrawEllipse(circle.pen, circle.x - circle.radius, circle.y - circle.radius,
+                          circle.radius + circle.radius, circle.radius + circle.radius);
+        }
+
+        public static void FillCircle(this Graphics g, Brush brush,
+                                      float centerX, float centerY, float radius)
+        {
+            g.FillEllipse(brush, centerX - radius, centerY - radius,
+                          radius + radius, radius + radius);
+        }
+
+        public static bool IsPointInCirle(int x,int y,Circle circle)
+        {
+            if(((x - circle.x) * (x - circle.x) + (y - circle.y) * (y - circle.y)) < Math.Pow(circle.radius,2))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
     }
 }
