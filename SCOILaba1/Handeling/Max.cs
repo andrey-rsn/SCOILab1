@@ -11,48 +11,42 @@ namespace SCOILaba1.Handeling
     {
         public Bitmap Operation(int w, int h, int w2, int h2, Bitmap image1, Bitmap image2, string colorType1, string colorType2, int transparency1, int transparency2)
         {
-            StaticMethods.ResizePicture(ref image1, ref image2);
-            var height = image1.Height;
-            var width = image1.Width;
-            using (var img_out = new Bitmap(width, height))   //создаем пустое изображение размером с исходное для сохранения результата
+            Bitmap inputBitmapImage1 = new Bitmap(image1);
+            Bitmap inputBitmapImage2 = new Bitmap(image2);
+
+            inputBitmapImage1 = StaticMethods.ResizeImage(inputBitmapImage1, new Size(Math.Max(image1.Width, image2.Width), Math.Max(image1.Height, image2.Height)));
+            inputBitmapImage2 = StaticMethods.ResizeImage(inputBitmapImage2, new Size(Math.Max(image1.Width, image2.Width), Math.Max(image1.Height, image2.Height)));
+
+            var inputImg1_byte = StaticMethods.BitmapToByteArray(inputBitmapImage1);
+            var inputImg2_byte = StaticMethods.BitmapToByteArray(inputBitmapImage2);
+
+            byte[] img_outByte = new byte[inputImg1_byte.Length];
+
+            using (var img_out = new Bitmap(Math.Max(image1.Width, image2.Width), Math.Max(image1.Height, image2.Height)))   //создаем пустое изображение размером с исходное для сохранения результата
             {
-                var image1Byte = StaticMethods.BitmapToByteRgbQ(image1);
-                var image2Byte = StaticMethods.BitmapToByteRgbQ(image2);
-                //попиксельно обрабатываем картинку 
-                for (int i = 0; i < height; ++i)
+
+                for (int i = 0; i < inputImg1_byte.Length - 2; i += 3)
                 {
-                    for (int j = 0; j < width; ++j)
-                    {
 
-                        int r1 = 0;
-                        int g1 = 0;
-                        int b1 = 0;
-                        int r2 = 0;
-                        int g2 = 0;
-                        int b2 = 0;
+                    int r1 = 0;
+                    int g1 = 0;
+                    int b1 = 0;
+                    int r2 = 0;
+                    int g2 = 0;
+                    int b2 = 0;
+                    StaticMethods.ChoosePixels(inputImg1_byte, inputImg2_byte, out r1, out g1, out b1, out r2, out g2, out b2, colorType1, colorType2, transparency1, transparency2, i);
 
+                    var r = (byte)Math.Max(r1 , r2);
+                    var g = (byte)Math.Max(g1 , g2);
+                    var b = (byte)Math.Max(b1 , b2);
 
-                        //считывыем пиксель картинки и получаем его цвет
-                        var pix1 = image1Byte;//.GetPixel(j, i);
-                        var pix2 = image2Byte;//.GetPixel(j, i);
+                    img_outByte[i] = r;
+                    img_outByte[i + 1] = g;
+                    img_outByte[i + 2] = b;
 
-                        StaticMethods.ChoosePixels(pix1, pix2, out r1, out g1, out b1, out r2, out g2, out b2, colorType1, colorType2, transparency1, transparency2, i, j);
-
-                        //Увеличим квет каждого пикселя на 1.4
-                        //При вычислении пикселей используем функию Clamp (см. ниже Main) чтобы цвет не вылезал за границы [0 255]
-                        var r = Math.Max(r1,r2);
-                        var g = Math.Max(g1,g2);
-                        var b = Math.Max(b1,b2);
-
-
-                        //записываем пиксель в изображение
-                        var pixResult = Color.FromArgb(r, g, b);
-                        img_out.SetPixel(j, i, pixResult);
-
-                        //ц-ции GetPixel и SetPixel работают достаточно медленно, надо стримится к минимизации их использования
-                    }
                 }
                 var imgClone = img_out.Clone() as Bitmap;
+                StaticMethods.writeImageBytes(imgClone, img_outByte);
                 return imgClone;
             }
         }

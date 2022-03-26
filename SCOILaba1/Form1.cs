@@ -160,7 +160,7 @@ namespace SCOILaba1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            GradPr gradPr = new GradPr();
+            GradPr gradPr = new GradPr(this,new Bitmap(pictureBox3.Image));
             gradPr.Show();
             this.Hide();
         }

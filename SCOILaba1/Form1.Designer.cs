@@ -128,6 +128,7 @@
             // 
             // colorType1Box
             // 
+            this.colorType1Box.Enabled = false;
             this.colorType1Box.FormattingEnabled = true;
             this.colorType1Box.Location = new System.Drawing.Point(1179, 41);
             this.colorType1Box.Name = "colorType1Box";
@@ -136,6 +137,7 @@
             // 
             // colorType2Box
             // 
+            this.colorType2Box.Enabled = false;
             this.colorType2Box.FormattingEnabled = true;
             this.colorType2Box.Location = new System.Drawing.Point(1179, 354);
             this.colorType2Box.Name = "colorType2Box";

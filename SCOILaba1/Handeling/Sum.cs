@@ -10,65 +10,47 @@ namespace SCOILaba1.Handeling
 {
     internal class Sum : IOperationStrategy
     {
+        
+        
         public Bitmap Operation(int w,int h,int w2,int h2,Bitmap image1,Bitmap image2,string colorType1,string colorType2,int transparency1,int transparency2)
         {
-            StaticMethods.ResizePicture(ref image1,ref image2);
-            var height=image1.Height;
-            var width=image1.Width;
-            byte[,,] img_outByte=new byte[3,height,width];
-            using (var img_out = new Bitmap(width, height))   //создаем пустое изображение размером с исходное для сохранения результата
+
+            Bitmap inputBitmapImage1 = new Bitmap(image1);
+            Bitmap inputBitmapImage2 = new Bitmap(image2);
+
+            inputBitmapImage1=StaticMethods.ResizeImage(inputBitmapImage1, new Size(Math.Max(image1.Width, image2.Width), Math.Max(image1.Height, image2.Height)));
+            inputBitmapImage2= StaticMethods.ResizeImage(inputBitmapImage2, new Size(Math.Max(image1.Width, image2.Width), Math.Max(image1.Height, image2.Height)));
+
+            var inputImg1_byte = StaticMethods.BitmapToByteArray(inputBitmapImage1);
+            var inputImg2_byte = StaticMethods.BitmapToByteArray(inputBitmapImage2);
+
+            byte[] img_outByte=new byte[inputImg1_byte.Length];
+
+            using (var img_out = new Bitmap(Math.Max(image1.Width,image2.Width), Math.Max(image1.Height, image2.Height)))   //создаем пустое изображение размером с исходное для сохранения результата
             {
-                var image1Byte= StaticMethods.BitmapToByteRgbQ(image1);
-                var image2Byte =StaticMethods.BitmapToByteRgbQ(image2);
 
-                //попиксельно обрабатываем картинку 
-                for (int i = 0; i < height; ++i)
+                for (int i = 0; i < inputImg1_byte.Length-2; i+=3)
                 {
-                    for (int j = 0; j < width; ++j)
-                    {
-                        int r1=0;
-                        int g1=0;
-                        int b1=0;
-                        int r2=0;
-                        int g2 = 0;
-                        int b2 = 0;
 
+                    int r1=0;
+                    int g1=0;
+                    int b1=0;
+                    int r2=0;
+                    int g2 = 0;
+                    int b2 = 0;
+                    StaticMethods.ChoosePixels(inputImg1_byte, inputImg2_byte, out r1, out g1, out b1, out r2, out g2, out b2, colorType1, colorType2, transparency1, transparency2,i);
 
-                        //считывыем пиксель картинки и получаем его цвет
-                        var pix1 = image1Byte;//.GetPixel(j, i);
-                        var pix2 = image2Byte;//.GetPixel(j, i);
-                        
-                        StaticMethods.ChoosePixels(pix1, pix2, out r1, out g1, out b1, out r2, out g2, out b2, colorType1, colorType2,transparency1,transparency2, i, j);
+                    var r = (byte)StaticMethods.Clamp(r1+r2 , 0, 255);
+                    var g = (byte)StaticMethods.Clamp(g1+g2 , 0, 255);
+                    var b = (byte)StaticMethods.Clamp(b1+b2 , 0, 255);
 
-                        //r1 = pix1[0, i, j];
-                        //g1 = pix1[1, i, j];
-                        //b1 = pix1[2, i, j];
-                        //
-                        //int r2 = pix2[0, i, j];
-                        //int g2 = pix2[1, i, j];
-                        //int b2 = pix2[2, i, j];
-
-                        //Увеличим квет каждого пикселя на 1.4
-                        //При вычислении пикселей используем функию Clamp (см. ниже Main) чтобы цвет не вылезал за границы [0 255]
-                        var r = (int)StaticMethods.Clamp(r1 + r2, 0, 255);
-                        var g = (int)StaticMethods.Clamp(g1 + g2, 0, 255);
-                        var b = (int)StaticMethods.Clamp(b1 + b2, 0, 255);
-
-
-                        //записываем пиксель в изображение
-                        var pixResult = Color.FromArgb(r, g, b);
-                        img_out.SetPixel(j, i, pixResult);
-                        //img_outByte[0, i, j] = Convert.ToByte(r);
-                        //img_outByte[1, i, j] = Convert.ToByte(g);
-                        //img_outByte[2, i, j] = Convert.ToByte(b);
-                        
-                        //ц-ции GetPixel и SetPixel работают достаточно медленно, надо стримится к минимизации их использования
-                    }
+                    img_outByte[i] = r;
+                    img_outByte[i+1] = g;
+                    img_outByte[i+2] = b;
+                    
                 }
-                
                 var imgClone = img_out.Clone() as Bitmap;
-                //StaticMethods.writeImageBytes(imgClone,img_outByte);
-                //return imgClone;
+                StaticMethods.writeImageBytes(imgClone, img_outByte);
                 return imgClone;
             }
         }

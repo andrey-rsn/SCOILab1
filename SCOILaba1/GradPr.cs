@@ -1,4 +1,5 @@
-﻿using SCOILaba1.Handeling;
+﻿using MathNet.Numerics.Interpolation;
+using SCOILaba1.Handeling;
 using SCOILaba1.Structures;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,20 @@ namespace SCOILaba1
 {
     public partial class GradPr : Form
     {
-        public GradPr()
+        private Bitmap inputImage=null;
+        private Form previousForm;
+        public GradPr(Form prevForm,Bitmap image)
         {
             InitializeComponent();
+            previousForm = prevForm;
+            inputImage = image;
+            
+            picture1.Image = inputImage;
+            picture1.Refresh();
+            
 
-            var canvas = new pan();
-             canvas.Size = new Size(510,510);
+            var canvas = new pan(this.picture1,inputImage.Clone() as Bitmap);
+            canvas.Size = new Size(510,510);
             canvas.Location = new Point(0, 0);
 
             //Сохдаем нашу канву.
@@ -51,10 +60,12 @@ namespace SCOILaba1
             Circle circle3;
             Circle circle4;
             Circle circle5;
+            CubicSpline interpolateFunc=null;
+            Bitmap inputImage = null;
+            PictureBox MainPictureBox = null;
 
 
-
-            public pan()
+            public pan(PictureBox pictureBox,Bitmap Image)
             {
                 redPen = new Pen(Color.Red, 1);
                 greenPen = new Pen(Color.Green, 10);
@@ -71,7 +82,8 @@ namespace SCOILaba1
                 circle3 = new Circle(point3.X, point3.Y, greenPen, 5);
                 circle4 = new Circle(point4.X, point4.Y, greenPen, 5);
                 circle5 = new Circle(point5.X, point5.Y, greenPen, 5);
-
+                inputImage = Image;
+                MainPictureBox = pictureBox;
                 //настраиваем стель для плавного рисования
                 this.SetStyle(
                     System.Windows.Forms.ControlStyles.UserPaint |
@@ -144,30 +156,36 @@ namespace SCOILaba1
 
             private void Pan_MouseUp(object sender, MouseEventArgs e)
             {
+                var points=new List<Point>() { point1,point2,point3,point4,point5};
                 if (circle1.IsSelected)
                 {
                     circle1.pen = greenPen;
                     circle1.IsSelected = false;
+                    interpolateFunc=CubicSpline.InterpolateAkimaSorted(points.Select(x=>(double)x.X).ToArray(), points.Select(x => (double)x.Y).ToArray());
                 }
                 else if (circle2.IsSelected)
                 {
                     circle2.pen = greenPen;
                     circle2.IsSelected = false;
+                    interpolateFunc = CubicSpline.InterpolateAkimaSorted(points.Select(x => (double)x.X).ToArray(), points.Select(x => (double)x.Y).ToArray());
                 }
                 else if (circle3.IsSelected)
                 {
                     circle3.pen = greenPen;
                     circle3.IsSelected = false;
+                    interpolateFunc = CubicSpline.InterpolateAkimaSorted(points.Select(x => (double)x.X).ToArray(), points.Select(x => (double)x.Y).ToArray());
                 }
                 else if (circle4.IsSelected)
                 {
                     circle4.pen = greenPen;
                     circle4.IsSelected = false;
+                    interpolateFunc = CubicSpline.InterpolateAkimaSorted(points.Select(x => (double)x.X).ToArray(), points.Select(x => (double)x.Y).ToArray());
                 }
                 else if (circle5.IsSelected)
                 {
                     circle5.pen = greenPen;
                     circle5.IsSelected = false;
+                    interpolateFunc = CubicSpline.InterpolateAkimaSorted(points.Select(x => (double)x.X).ToArray(), points.Select(x => (double)x.Y).ToArray());
                 }
             }
 
@@ -216,14 +234,29 @@ namespace SCOILaba1
                 //e.Graphics.FillRectangle(Brushes.Red, 0, 0, Size.Width, Size.Height);
 
                 // Create points that define curve.
-                Point[] curvePoints = { point1,point2,point3, point4,point5 };
-                
-                e.Graphics.DrawCurve(redPen, curvePoints);
-                StaticMethods.DrawCircle(e.Graphics, circle1);
-                StaticMethods.DrawCircle(e.Graphics, circle2);
-                StaticMethods.DrawCircle(e.Graphics, circle3);
-                StaticMethods.DrawCircle(e.Graphics, circle4);
-                StaticMethods.DrawCircle(e.Graphics, circle5);
+                if(inputImage!=null)
+                { 
+                    Point[] curvePoints = { point1,point2,point3, point4,point5 };
+                    
+                    e.Graphics.DrawCurve(redPen, curvePoints);
+                    StaticMethods.DrawCircle(e.Graphics, circle1);
+                    StaticMethods.DrawCircle(e.Graphics, circle2);
+                    StaticMethods.DrawCircle(e.Graphics, circle3);
+                    StaticMethods.DrawCircle(e.Graphics, circle4);
+                    StaticMethods.DrawCircle(e.Graphics, circle5);
+
+                     if (interpolateFunc != null)
+                     {
+                        this.Enabled = false;
+                         MainPictureBox.Image = null;
+                         MainPictureBox.Image = GradTransform.GradTransformImage(inputImage, interpolateFunc);
+                         MainPictureBox.Refresh();
+                        this.Enabled = true;
+                     }
+
+                    
+                }
+
 
             }
         }
