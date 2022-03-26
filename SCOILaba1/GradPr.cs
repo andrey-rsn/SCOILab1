@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -187,41 +188,50 @@ namespace SCOILaba1
                     circle5.IsSelected = false;
                     interpolateFunc = CubicSpline.InterpolateAkimaSorted(points.Select(x => (double)x.X).ToArray(), points.Select(x => (double)x.Y).ToArray());
                 }
+                if(interpolateFunc!=null)
+                {
+                    this.Enabled = false;
+                    MainPictureBox.Image = null;
+                    MainPictureBox.Image = GradTransform.GradTransformImage(inputImage, interpolateFunc);
+                    MainPictureBox.Refresh();
+                    this.Enabled = true;
+                }
             }
 
             private void Pan_MouseDown(object sender, MouseEventArgs e)
             {
+                if (this.Enabled)
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle1))
+                        {
+                            circle1.pen = orangePen;
+                            circle1.IsSelected = true;
+                        }
+                        else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle2))
+                        {
+                            circle2.pen = orangePen;
+                            circle2.IsSelected = true;
+                        }
+                        else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle3))
+                        {
+                            circle3.pen = orangePen;
+                            circle3.IsSelected = true;
+                        }
+                        else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle4))
+                        {
+                            circle4.pen = orangePen;
+                            circle4.IsSelected = true;
+                        }
+                        else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle5))
+                        {
+                            circle5.pen = orangePen;
+                            circle5.IsSelected = true;
+                        }
 
-                if (e.Button == MouseButtons.Left) {
-                    if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle1))
-                    {
-                        circle1.pen = orangePen;
-                        circle1.IsSelected = true;
                     }
-                    else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle2))
-                    {
-                        circle2.pen = orangePen;
-                        circle2.IsSelected = true;
-                    }
-                    else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle3))
-                    {
-                        circle3.pen = orangePen;
-                        circle3.IsSelected = true;
-                    }
-                    else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle4))
-                    {
-                        circle4.pen = orangePen;
-                        circle4.IsSelected = true;
-                    }
-                    else if (StaticMethods.IsPointInCirle(e.Location.X, e.Location.Y, circle5))
-                    {
-                        circle5.pen = orangePen;
-                        circle5.IsSelected = true;
-                    }
-                    
                 }
-                else if (e.Button == MouseButtons.Right)
-                { }
 
             }
 
@@ -245,14 +255,17 @@ namespace SCOILaba1
                     StaticMethods.DrawCircle(e.Graphics, circle4);
                     StaticMethods.DrawCircle(e.Graphics, circle5);
 
-                     if (interpolateFunc != null)
-                     {
-                        this.Enabled = false;
-                         MainPictureBox.Image = null;
-                         MainPictureBox.Image = GradTransform.GradTransformImage(inputImage, interpolateFunc);
-                         MainPictureBox.Refresh();
-                        this.Enabled = true;
-                     }
+                     //if (interpolateFunc != null)
+                     //{
+                     //   
+                     //  this.Enabled = false;
+                     //  MainPictureBox.Image = null;
+                     //  MainPictureBox.Image = GradTransform.GradTransformImage(inputImage, interpolateFunc);
+                     //  MainPictureBox.Refresh();
+                     //  this.Enabled = true;
+                     //   
+                     //   
+                     //}
 
                     
                 }
