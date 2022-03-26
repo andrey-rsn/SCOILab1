@@ -19,17 +19,21 @@ namespace SCOILaba1
     {
         private Bitmap inputImage=null;
         private Form previousForm;
+        private Bitmap HistImage = null;
         public GradPr(Form prevForm,Bitmap image)
         {
             InitializeComponent();
             previousForm = prevForm;
-            inputImage = image;
+            inputImage = image.Clone() as Bitmap;
             
             picture1.Image = inputImage;
             picture1.Refresh();
+            HistImage=Histogram.CreateHistogramm(inputImage);
+            HistPictureBox.Image = HistImage;
+            HistPictureBox.Refresh();
             
 
-            var canvas = new pan(this.picture1,inputImage.Clone() as Bitmap);
+            var canvas = new pan(this.picture1,this.HistPictureBox,inputImage.Clone() as Bitmap);
             canvas.Size = new Size(510,510);
             canvas.Location = new Point(0, 0);
 
@@ -64,9 +68,11 @@ namespace SCOILaba1
             CubicSpline interpolateFunc=null;
             Bitmap inputImage = null;
             PictureBox MainPictureBox = null;
+            PictureBox HistPictureBox = null;
+            Bitmap Hist = null;
 
 
-            public pan(PictureBox pictureBox,Bitmap Image)
+            public pan(PictureBox pictureBox, PictureBox HistogramPictureBox, Bitmap Image)
             {
                 redPen = new Pen(Color.Red, 1);
                 greenPen = new Pen(Color.Green, 10);
@@ -85,6 +91,8 @@ namespace SCOILaba1
                 circle5 = new Circle(point5.X, point5.Y, greenPen, 5);
                 inputImage = Image;
                 MainPictureBox = pictureBox;
+               // Hist = HistogramPictureBox.Image;
+                HistPictureBox = HistogramPictureBox;
                 //настраиваем стель для плавного рисования
                 this.SetStyle(
                     System.Windows.Forms.ControlStyles.UserPaint |
@@ -157,7 +165,8 @@ namespace SCOILaba1
 
             private void Pan_MouseUp(object sender, MouseEventArgs e)
             {
-                var points=new List<Point>() { point1,point2,point3,point4,point5};
+                var ChangedPoints=new List<Point>() {point1,point2,point3,point4,point5};
+                var points=StaticMethods.ConvertListOfPointsToNormalPoints(ChangedPoints);
                 if (circle1.IsSelected)
                 {
                     circle1.pen = greenPen;
@@ -194,6 +203,10 @@ namespace SCOILaba1
                     MainPictureBox.Image = null;
                     MainPictureBox.Image = GradTransform.GradTransformImage(inputImage, interpolateFunc);
                     MainPictureBox.Refresh();
+                    var imageToHist = (Bitmap)MainPictureBox.Image;
+                    HistPictureBox.Image = null;
+                    HistPictureBox.Image=Histogram.CreateHistogramm(imageToHist);
+                    HistPictureBox.Refresh();
                     this.Enabled = true;
                 }
             }
@@ -255,19 +268,6 @@ namespace SCOILaba1
                     StaticMethods.DrawCircle(e.Graphics, circle4);
                     StaticMethods.DrawCircle(e.Graphics, circle5);
 
-                     //if (interpolateFunc != null)
-                     //{
-                     //   
-                     //  this.Enabled = false;
-                     //  MainPictureBox.Image = null;
-                     //  MainPictureBox.Image = GradTransform.GradTransformImage(inputImage, interpolateFunc);
-                     //  MainPictureBox.Refresh();
-                     //  this.Enabled = true;
-                     //   
-                     //   
-                     //}
-
-                    
                 }
 
 

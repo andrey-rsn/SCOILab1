@@ -269,7 +269,21 @@ namespace SCOILaba1.Handeling
             return new Point(x*2,Math.Abs(y-255)*2);
         }
 
-        
+        public static Point ConvertPointToNormalPoint(Point point)
+        {
+            return new Point(point.X / 2, Math.Abs(point.Y - 255) / 2);
+        }
+        public static List<Point> ConvertListOfPointsToNormalPoints(List<Point> points)
+        {
+            List<Point> outPoints=new List<Point>();
+            foreach(var p in points)
+            {
+                outPoints.Add( new Point(p.X / 2, Math.Abs(p.Y - 255) / 2)); 
+            }
+            return outPoints;
+            
+        }
+
         public static void DrawCircle(this Graphics g, Circle circle)
         {
             g.DrawEllipse(circle.pen, circle.x - circle.radius, circle.y - circle.radius,

@@ -30,8 +30,11 @@
         {
             this.picture1 = new System.Windows.Forms.PictureBox();
             this.gradPicture = new System.Windows.Forms.PictureBox();
+            this.HistPictureBox = new System.Windows.Forms.PictureBox();
+            this.BackButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picture1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HistPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // picture1
@@ -53,17 +56,39 @@
             this.gradPicture.TabIndex = 1;
             this.gradPicture.TabStop = false;
             // 
+            // HistPictureBox
+            // 
+            this.HistPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.HistPictureBox.Location = new System.Drawing.Point(12, 539);
+            this.HistPictureBox.Name = "HistPictureBox";
+            this.HistPictureBox.Size = new System.Drawing.Size(589, 162);
+            this.HistPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.HistPictureBox.TabIndex = 2;
+            this.HistPictureBox.TabStop = false;
+            // 
+            // BackButton
+            // 
+            this.BackButton.Location = new System.Drawing.Point(1012, 668);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(126, 33);
+            this.BackButton.TabIndex = 3;
+            this.BackButton.Text = "Назад";
+            this.BackButton.UseVisualStyleBackColor = true;
+            // 
             // GradPr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 565);
+            this.ClientSize = new System.Drawing.Size(1157, 717);
+            this.Controls.Add(this.BackButton);
+            this.Controls.Add(this.HistPictureBox);
             this.Controls.Add(this.gradPicture);
             this.Controls.Add(this.picture1);
             this.Name = "GradPr";
             this.Text = "GradPr";
             ((System.ComponentModel.ISupportInitialize)(this.picture1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradPicture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HistPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -72,5 +97,7 @@
 
         private System.Windows.Forms.PictureBox picture1;
         private System.Windows.Forms.PictureBox gradPicture;
+        private System.Windows.Forms.PictureBox HistPictureBox;
+        private System.Windows.Forms.Button BackButton;
     }
 }

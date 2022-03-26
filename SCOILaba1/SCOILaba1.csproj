@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="Handeling\Average.cs" />
     <Compile Include="Handeling\GradTransform.cs" />
+    <Compile Include="Handeling\Histogram.cs" />
     <Compile Include="Handeling\StaticMethods.cs" />
     <Compile Include="Handeling\IOperations.cs" />
     <Compile Include="Handeling\Mask.cs" />

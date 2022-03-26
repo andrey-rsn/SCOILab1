@@ -27,9 +27,9 @@ namespace SCOILaba1.Handeling
                     byte g1 = inputImage[i+1];
                     byte b1 = inputImage[i+2];
 
-                    var r = (byte)StaticMethods.Clamp(255*Math.Pow(spline.Interpolate(r1)/255,2) , 0, 255);
-                    var g = (byte)StaticMethods.Clamp(255 * Math.Pow(spline.Interpolate(g1) / 255, 2), 0, 255);
-                    var b = (byte)StaticMethods.Clamp(255 * Math.Pow(spline.Interpolate(b1) / 255, 2), 0, 255);
+                    var r = (byte)StaticMethods.Clamp(255.0*Math.Pow(spline.Interpolate(r1)/255.0,2) , 0, 255);
+                    var g = (byte)StaticMethods.Clamp(255.0 * Math.Pow(spline.Interpolate(g1) / 255.0, 2), 0, 255);
+                    var b = (byte)StaticMethods.Clamp(255.0 * Math.Pow(spline.Interpolate(b1) / 255.0, 2), 0, 255);
 
                     imgOutByte[i] = r;
                     imgOutByte[i+1] = g;
