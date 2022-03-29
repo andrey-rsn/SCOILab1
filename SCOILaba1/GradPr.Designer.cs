@@ -32,6 +32,8 @@
             this.gradPicture = new System.Windows.Forms.PictureBox();
             this.HistPictureBox = new System.Windows.Forms.PictureBox();
             this.BackButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picture1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HistPictureBox)).BeginInit();
@@ -74,12 +76,33 @@
             this.BackButton.TabIndex = 3;
             this.BackButton.Text = "Назад";
             this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(1000, 539);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(138, 21);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(941, 543);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Функция";
             // 
             // GradPr
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 717);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.HistPictureBox);
             this.Controls.Add(this.gradPicture);
@@ -90,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gradPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HistPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -99,5 +123,7 @@
         private System.Windows.Forms.PictureBox gradPicture;
         private System.Windows.Forms.PictureBox HistPictureBox;
         private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
     }
 }

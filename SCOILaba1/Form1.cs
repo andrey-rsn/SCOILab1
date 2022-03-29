@@ -52,6 +52,26 @@ namespace SCOILaba1
 
         }
 
+        public Form1(Bitmap image1,Bitmap image2,Bitmap image3)
+        {
+            InitializeComponent();
+            image1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            image2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            resultImage = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+            
+
+            comboBox1.DataSource = Operations;
+            colorType1Box.DataSource = ColorTypes.ToArray();
+            colorType2Box.DataSource = ColorTypes.ToArray();
+            this.pictureBox1.Image = image1;
+            this.pictureBox2.Image = image2;
+            this.pictureBox3.Image = image3;
+
+            this.pictureBox1.Refresh();
+            this.pictureBox2.Refresh();
+            this.pictureBox3.Refresh();
+        }
+
         private void OpenButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -98,39 +118,46 @@ namespace SCOILaba1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
-            var w = image1.Width;
-            var h = image1.Height;
-
-            var w2 = image2.Width;
-            var h2 = image2.Height;
-
-            IOperationStrategy strategy = null;
-
-            if (string.Equals(comboBox1.SelectedItem, "Сумма"))
-                strategy = new Sum();
-            else if (string.Equals(comboBox1.SelectedItem, "Умножение"))
-                strategy = new Multiply();
-            else if (string.Equals(comboBox1.SelectedItem, "Среднее арефметическое"))
-                strategy = new Average();
-            else if (string.Equals(comboBox1.SelectedItem, "Минимум"))
-                strategy = new Min();
-            else if (string.Equals(comboBox1.SelectedItem, "Максимум"))
-                strategy = new Max();
-            else if (string.Equals(comboBox1.SelectedItem, "Наложение"))
-                strategy = new Mask();
-
-
-
-            if (strategy != null)
+            if (image1 != null && image2 != null)
             {
-                pictureBox3.Image = strategy.Operation(w, h, w2, h2, image1, image2,colorType1Box.Text,colorType2Box.Text,trackBar1.Value,trackBar2.Value);
-                pictureBox3.Refresh();
-                button3.Enabled = true;
+
+                var w = image1.Width;
+                var h = image1.Height;
+
+                var w2 = image2.Width;
+                var h2 = image2.Height;
+
+                IOperationStrategy strategy = null;
+
+                if (string.Equals(comboBox1.SelectedItem, "Сумма"))
+                    strategy = new Sum();
+                else if (string.Equals(comboBox1.SelectedItem, "Умножение"))
+                    strategy = new Multiply();
+                else if (string.Equals(comboBox1.SelectedItem, "Среднее арефметическое"))
+                    strategy = new Average();
+                else if (string.Equals(comboBox1.SelectedItem, "Минимум"))
+                    strategy = new Min();
+                else if (string.Equals(comboBox1.SelectedItem, "Максимум"))
+                    strategy = new Max();
+                else if (string.Equals(comboBox1.SelectedItem, "Наложение"))
+                    strategy = new Mask();
+
+
+
+                if (strategy != null)
+                {
+                    pictureBox3.Image = strategy.Operation(w, h, w2, h2, image1, image2, colorType1Box.Text, colorType2Box.Text, trackBar1.Value, trackBar2.Value);
+                    pictureBox3.Refresh();
+                    button3.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Некорректная операция");
+                }
             }
             else
             {
-                MessageBox.Show("Некорректная операция");
+                MessageBox.Show("Одно из изображений отсутствует");
             }
             
         }
@@ -160,7 +187,7 @@ namespace SCOILaba1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            GradPr gradPr = new GradPr(this,pictureBox3.Image.Clone() as Bitmap);
+            GradPr gradPr = new GradPr(this,pictureBox1.Image.Clone() as Bitmap,pictureBox2.Image.Clone() as Bitmap,pictureBox3.Image.Clone() as Bitmap);
             gradPr.Show();
             this.Hide();
         }

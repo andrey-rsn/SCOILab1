@@ -278,7 +278,7 @@ namespace SCOILaba1.Handeling
             List<Point> outPoints=new List<Point>();
             foreach(var p in points)
             {
-                outPoints.Add( new Point(p.X / 2, Math.Abs(p.Y - 255) / 2)); 
+                outPoints.Add( new Point(p.X / 2, Math.Abs(p.Y - 255*2)) ); 
             }
             return outPoints;
             
