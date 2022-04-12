@@ -40,6 +40,7 @@
             this.colorType2Box = new System.Windows.Forms.ComboBox();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -127,6 +128,7 @@
             // 
             // colorType1Box
             // 
+            this.colorType1Box.Enabled = false;
             this.colorType1Box.FormattingEnabled = true;
             this.colorType1Box.Location = new System.Drawing.Point(1179, 41);
             this.colorType1Box.Name = "colorType1Box";
@@ -135,6 +137,7 @@
             // 
             // colorType2Box
             // 
+            this.colorType2Box.Enabled = false;
             this.colorType2Box.FormattingEnabled = true;
             this.colorType2Box.Location = new System.Drawing.Point(1179, 354);
             this.colorType2Box.Name = "colorType2Box";
@@ -161,12 +164,23 @@
             this.trackBar1.TickFrequency = 10;
             this.trackBar1.Value = 100;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(677, 530);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(202, 38);
+            this.button4.TabIndex = 13;
+            this.button4.Text = "Градационные преобразования";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1406, 640);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.colorType2Box);
@@ -205,6 +219,7 @@
         private System.Windows.Forms.ComboBox colorType2Box;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button button4;
     }
 }
 
