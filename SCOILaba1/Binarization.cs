@@ -15,7 +15,7 @@ namespace SCOILaba1
     {
         private static List<string> BinarizationTypes = new List<string>()
         {
-            "",
+            "Без обработки",
             "Критерий Гаврилова",
             "Критерий Отсу"
         };
@@ -39,8 +39,10 @@ namespace SCOILaba1
             {
                 strategy = new OtsuCriteria();
             }
-
-            var resultImage=strategy.Opeartion(InputImage.Clone()as Bitmap);
+            
+            var resultImage=strategy==null? InputImage.Clone() as Bitmap: strategy.Opeartion(InputImage.Clone()as Bitmap);
+            
+            
 
             this.InputPictureBox.Image = null;
             this.InputPictureBox.Image = resultImage;

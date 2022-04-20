@@ -23,6 +23,7 @@ namespace SCOILaba1
         private Bitmap pictureBox2Image = null;
         private Form previousForm;
         private Bitmap HistImage = null;
+        
         List<string> functions=new List<string>()
         {
             "y=x",
@@ -82,6 +83,7 @@ namespace SCOILaba1
             PictureBox HistPictureBox = null;
             Bitmap Hist = null;
             
+            
 
             public pan(PictureBox pictureBox, PictureBox HistogramPictureBox, Bitmap Image)
             {
@@ -104,6 +106,7 @@ namespace SCOILaba1
                 MainPictureBox = pictureBox;
                // Hist = HistogramPictureBox.Image;
                 HistPictureBox = HistogramPictureBox;
+                
                 
                 //настраиваем стель для плавного рисования
                 this.SetStyle(
@@ -193,46 +196,45 @@ namespace SCOILaba1
                 {
                     circle2.pen = greenPen;
                     circle2.IsSelected = false;
-                    interpolateFunc = CubicSpline.InterpolateAkima(xs, ys);
+                    interpolateFunc = CubicSpline.InterpolateNatural(xs, ys);
                 }                                                        
                 else if (circle3.IsSelected)                             
                 {                                                        
                     circle3.pen = greenPen;                              
                     circle3.IsSelected = false;
-                    interpolateFunc = CubicSpline.InterpolateAkima(xs, ys);
+                    interpolateFunc = CubicSpline.InterpolateNatural(xs, ys);
                 }                                                        
                 else if (circle4.IsSelected)                             
                 {                                                        
                     circle4.pen = greenPen;                              
                     circle4.IsSelected = false;
-                    interpolateFunc = CubicSpline.InterpolateAkima(xs, ys);
+                    interpolateFunc = CubicSpline.InterpolateNatural(xs, ys);
                 }                                                        
                 else if (circle5.IsSelected)                             
                 {                                                        
                     circle5.pen = greenPen;                              
                     circle5.IsSelected = false;
-                    interpolateFunc = CubicSpline.InterpolateAkima(xs, ys);
+                    interpolateFunc = CubicSpline.InterpolateNatural(xs, ys);
                 }
                 if(interpolateFunc!=null)
                 {
-                    //this.Enabled = false;
-                    //var gradTransformImage=GradTransform.GradTransformImage(inputImage, M);
+                    this.Enabled = false;
+                    var gradTransformImage=GradTransform.GradTransformImage(inputImage, interpolateFunc);
+                    MainPictureBox.Image = null;
+                    MainPictureBox.Image = gradTransformImage.Clone() as Bitmap;
+                    MainPictureBox.Refresh();
 
-                    //MainPictureBox.Image = null;
-                    //MainPictureBox.Image = new Bitmap(gradTransformImage);
-                    //MainPictureBox.Refresh();
-
-                    //var imageToHist = Histogram.CreateHistogramm(gradTransformImage);
-                    //
-                    //HistPictureBox.Image = null;
-                    //HistPictureBox.Image = new Bitmap(imageToHist);
-                    //HistPictureBox.Refresh();
-                    //
-                    //gradTransformImage.Dispose();
-                    //
-                    //imageToHist.Dispose();
-                    //
-                    //this.Enabled = true;
+                    var imageToHist = Histogram.CreateHistogramm(gradTransformImage);
+                    
+                    HistPictureBox.Image = null;
+                    HistPictureBox.Image = imageToHist.Clone() as Bitmap;
+                    HistPictureBox.Refresh();
+                    
+                    gradTransformImage.Dispose();
+                    
+                    imageToHist.Dispose();
+                    
+                    this.Enabled = true;
                 }
             }
 
@@ -302,19 +304,19 @@ namespace SCOILaba1
 
        private void comboBox1_TextChanged(object sender, EventArgs e)
        {
-           var gradPicture= GradTransform.GradTransformImage(inputImage, this.comboBox1.Text);
-           this.picture1.Image = null;
-           this.picture1.Image = gradPicture;
-           this.picture1.Refresh();
-           
-           this.HistPictureBox.Image = null;
-           this.HistPictureBox.Image = Histogram.CreateHistogramm(gradPicture);
-           this.HistPictureBox.Refresh();
+           //var gradPicture= GradTransform.GradTransformImage(inputImage, this.comboBox1.Text);
+           //this.picture1.Image = null;
+           //this.picture1.Image = gradPicture;
+           //this.picture1.Refresh();
+           //
+           //this.HistPictureBox.Image = null;
+           //this.HistPictureBox.Image = Histogram.CreateHistogramm(gradPicture);
+           //this.HistPictureBox.Refresh();
        }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            Form1 form1 = new Form1(pictureBox1Image, pictureBox2Image, (Bitmap)this.picture1.Image);
+            Form1 form1 = new Form1(this.picture1.Image.Clone() as Bitmap);
             form1.Show();
             this.Hide();
         }
