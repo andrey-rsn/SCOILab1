@@ -58,8 +58,8 @@ namespace SCOILaba1
             image1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             image2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
             resultImage = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-            
 
+            this.button3.Enabled = true;
             comboBox1.DataSource = Operations;
             colorType1Box.DataSource = ColorTypes.ToArray();
             colorType2Box.DataSource = ColorTypes.ToArray();
@@ -77,7 +77,7 @@ namespace SCOILaba1
             image1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             image2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
             resultImage = new Bitmap(pictureBox3.Width, pictureBox3.Height);
-
+            this.button3.Enabled = true;
 
             comboBox1.DataSource = Operations;
             colorType1Box.DataSource = ColorTypes.ToArray();
@@ -215,6 +215,13 @@ namespace SCOILaba1
         {
             var Binazrize = new Binarization(this.pictureBox3.Image.Clone() as Bitmap);
             Binazrize.Show();
+            this.Hide();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var Filtering = new Filtering(this.pictureBox3.Image.Clone() as Bitmap);
+            Filtering.Show();
             this.Hide();
         }
     }

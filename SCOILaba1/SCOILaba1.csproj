@@ -83,6 +83,7 @@
     <Compile Include="Handeling\IBinarizationStrategy.cs" />
     <Compile Include="Handeling\IFilteringStrategy.cs" />
     <Compile Include="Handeling\LinearFiltering.cs" />
+    <Compile Include="Handeling\MedianFiltering.cs" />
     <Compile Include="Handeling\OtsuCriteria.cs" />
     <Compile Include="Handeling\StaticMethods.cs" />
     <Compile Include="Handeling\IOperations.cs" />

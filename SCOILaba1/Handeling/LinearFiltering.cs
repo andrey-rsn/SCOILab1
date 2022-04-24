@@ -54,7 +54,6 @@ namespace SCOILaba1.Handeling
                 }
                 
                 index = 0;
-                index2 = 0;
                 for (int i = 0; i < dim1; i++)
                 {
                     for(int j=0;j< dim2; j++)
@@ -88,7 +87,7 @@ namespace SCOILaba1.Handeling
                         {
                             pixel = matrix[0, 0] * img_Brightness[i - 1, j - 1] + matrix[0, 1] * img_Brightness[i - 1, j] + matrix[0, 2] * img_Brightness[i - 1, j + 1] + matrix[1, 0] * img_Brightness[i, j - 1] + matrix[1, 1] * img_Brightness[i, j] + matrix[1, 2] * img_Brightness[i, j + 1] + matrix[2, 0] * img_Brightness[i - 1, j - 1] + matrix[2, 1] * img_Brightness[i - 1, j] + matrix[2, 2] * img_Brightness[i - 1, j + 1];
                         }
-                        else if(j==dim2-1&&i>0&&i<dim1-1)
+                        else if(j==0&&i>0&&i<dim1-1)
                         {
                             pixel = matrix[0, 0] * img_Brightness[i - 1, j + 1] + matrix[0, 1] * img_Brightness[i - 1, j] + matrix[0, 2] * img_Brightness[i - 1, j + 1] + matrix[1, 0] * img_Brightness[i, j + 1] + matrix[1, 1] * img_Brightness[i, j] + matrix[1, 2] * img_Brightness[i, j + 1] + matrix[2, 0] * img_Brightness[i + 1, j + 1] + matrix[2, 1] * img_Brightness[i + 1, j] + matrix[2, 2] * img_Brightness[i + 1, j + 1];
                         }
@@ -96,17 +95,19 @@ namespace SCOILaba1.Handeling
                         {
                             pixel = matrix[0, 0] * img_Brightness[i - 1, j - 1] + matrix[0, 1] * img_Brightness[i - 1, j] + matrix[0, 2] * img_Brightness[i - 1, j + 1] + matrix[1, 0] * img_Brightness[i, j - 1] + matrix[1, 1] * img_Brightness[i, j] + matrix[1, 2] * img_Brightness[i, j + 1] + matrix[2, 0] * img_Brightness[i + 1, j - 1] + matrix[2, 1] * img_Brightness[i + 1, j] + matrix[2, 2] * img_Brightness[i + 1, j + 1];
                         }
-                        img_outByte[index] = (byte)StaticMethods.Clamp(pixel * 4.7036,0,255);
-                        img_outByte[index+1] = (byte)StaticMethods.Clamp(pixel * 1.3982, 0, 255);
-                        img_outByte[index+2] = (byte)StaticMethods.Clamp(pixel * 13.8504, 0, 255);
-                        index+=3;
+                        //img_outByte[index] = (byte)StaticMethods.Clamp(pixel * 4.7036,0,255);
+                        //img_outByte[index+1] = (byte)StaticMethods.Clamp(pixel * 1.3982, 0, 255);
+                        //img_outByte[index+2] = (byte)StaticMethods.Clamp(pixel * 13.8504, 0, 255);
+                        img_outByte[index] = (byte)StaticMethods.Clamp(pixel , 0, 255);
+                        img_outByte[index + 1] = (byte)StaticMethods.Clamp(pixel , 0, 255);
+                        img_outByte[index + 2] = (byte)StaticMethods.Clamp(pixel, 0, 255);
+                        index +=3;
                     }
 
                 }
                 var imgClone = img_out.Clone() as Bitmap;
 
                 StaticMethods.writeImageBytes(imgClone, img_outByte);
-                //imgClone.SetResolution(copyImage.HorizontalResolution, copyImage.VerticalResolution);
 
                 return imgClone;
             }
