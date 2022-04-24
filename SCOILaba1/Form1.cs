@@ -71,6 +71,25 @@ namespace SCOILaba1
             this.pictureBox2.Refresh();
             this.pictureBox3.Refresh();
         }
+        public Form1(Bitmap image)
+        {
+            InitializeComponent();
+            image1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            image2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            resultImage = new Bitmap(pictureBox3.Width, pictureBox3.Height);
+
+
+            comboBox1.DataSource = Operations;
+            colorType1Box.DataSource = ColorTypes.ToArray();
+            colorType2Box.DataSource = ColorTypes.ToArray();
+            this.pictureBox1.Image = image1;
+            this.pictureBox2.Image = image2;
+            this.pictureBox3.Image = image;
+
+            this.pictureBox1.Refresh();
+            this.pictureBox2.Refresh();
+            this.pictureBox3.Refresh();
+        }
 
         private void OpenButton_Click(object sender, EventArgs e)
         {
@@ -189,6 +208,13 @@ namespace SCOILaba1
         {
             GradPr gradPr = new GradPr(this,pictureBox1.Image.Clone() as Bitmap,pictureBox2.Image.Clone() as Bitmap,pictureBox3.Image.Clone() as Bitmap);
             gradPr.Show();
+            this.Hide();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var Binazrize = new Binarization(this.pictureBox3.Image.Clone() as Bitmap);
+            Binazrize.Show();
             this.Hide();
         }
     }
