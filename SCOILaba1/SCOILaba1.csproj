@@ -58,6 +58,12 @@
     <Compile Include="Binarization.Designer.cs">
       <DependentUpon>Binarization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filtering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Filtering.Designer.cs">
+      <DependentUpon>Filtering.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,8 @@
     <Compile Include="Handeling\GradTransform.cs" />
     <Compile Include="Handeling\Histogram.cs" />
     <Compile Include="Handeling\IBinarizationStrategy.cs" />
+    <Compile Include="Handeling\IFilteringStrategy.cs" />
+    <Compile Include="Handeling\LinearFiltering.cs" />
     <Compile Include="Handeling\OtsuCriteria.cs" />
     <Compile Include="Handeling\StaticMethods.cs" />
     <Compile Include="Handeling\IOperations.cs" />
@@ -89,6 +97,9 @@
     <Compile Include="Structures\Circle.cs" />
     <EmbeddedResource Include="Binarization.resx">
       <DependentUpon>Binarization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Filtering.resx">
+      <DependentUpon>Filtering.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
