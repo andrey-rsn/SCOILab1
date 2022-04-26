@@ -70,6 +70,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FreqFiltering.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FreqFiltering.Designer.cs">
+      <DependentUpon>FreqFiltering.cs</DependentUpon>
+    </Compile>
     <Compile Include="GradPr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,7 @@
       <DependentUpon>GradPr.cs</DependentUpon>
     </Compile>
     <Compile Include="Handeling\Average.cs" />
+    <Compile Include="Handeling\FrequencyFiltering.cs" />
     <Compile Include="Handeling\GavrCriteria.cs" />
     <Compile Include="Handeling\GradTransform.cs" />
     <Compile Include="Handeling\Histogram.cs" />
@@ -104,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FreqFiltering.resx">
+      <DependentUpon>FreqFiltering.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GradPr.resx">
       <DependentUpon>GradPr.cs</DependentUpon>

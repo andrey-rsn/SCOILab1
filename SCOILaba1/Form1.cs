@@ -17,6 +17,7 @@ namespace SCOILaba1
         private Bitmap image1 = null;
         private Bitmap image2 = null;
         private Bitmap resultImage = null;
+        private Bitmap imageForFiltering = null;
         List<string> Operations = new List<string>()
         {
             "Сумма",
@@ -108,6 +109,7 @@ namespace SCOILaba1
 
                     image1 = new Bitmap(openFileDialog.FileName);
                     pictureBox1.Image = image1;
+                    imageForFiltering = image1.Clone() as Bitmap;
 
                 }
             }
@@ -223,6 +225,13 @@ namespace SCOILaba1
             var Filtering = new Filtering(this.pictureBox3.Image.Clone() as Bitmap);
             Filtering.Show();
             this.Hide();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var frequencyFiltering = new FreqFiltering(imageForFiltering.Clone()as Bitmap);
+            frequencyFiltering.Show();
+            //this.Hide();
         }
     }
 }

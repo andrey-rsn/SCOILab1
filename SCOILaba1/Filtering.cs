@@ -27,6 +27,7 @@ namespace SCOILaba1
             this.mainImagePictureBox.Image = _inputImage.Clone() as Bitmap;
             this.mainImagePictureBox.Refresh();
             this.filterType.DataSource = filterTypes;
+            
         }
 
         private void applyButton_Click(object sender, EventArgs e)

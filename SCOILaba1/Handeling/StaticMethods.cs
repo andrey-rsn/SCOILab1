@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -428,6 +429,32 @@ namespace SCOILaba1.Handeling
             b2 = (int)Math.Round(b2 * transparency2 * 0.01);
         }
 
+        public static Complex[] TwoDiscreteTransformation(Complex[] X)
+        {
+            int N = X.Length;
+            Complex[] G = new Complex[N];
 
+
+            for (int u = 0; u < N; u++)
+                for (int k = 0; k < N; k++)
+                {
+                    double fi = (-2 * Math.PI * u * k) / N;
+                    G[u] += (new Complex(Math.Cos(fi), Math.Sin(fi)) * X[k]) / N;
+                }
+            return G;
+        }
+
+        public static Complex[] TwoDiscreteTransformationReverse(Complex[] X)
+        {
+            int N = X.Length;
+            Complex[] G = new Complex[N];
+            for (int u = 0; u < N; u++)
+                for (int k = 0; k < N; k++)
+                {
+                    double fi = (2 * Math.PI * u * k) / N;
+                    G[u] += (new Complex(Math.Cos(fi), Math.Sin(fi)) * X[k]);
+                }
+            return G;
+        }
     }
 }
