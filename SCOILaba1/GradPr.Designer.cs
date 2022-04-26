@@ -85,6 +85,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(138, 21);
             this.comboBox1.TabIndex = 5;
+            this.comboBox1.Visible = false;
             this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // label1
@@ -95,6 +96,7 @@
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Функция";
+            this.label1.Visible = false;
             // 
             // GradPr
             // 

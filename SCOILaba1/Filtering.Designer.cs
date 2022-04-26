@@ -77,24 +77,24 @@
             this.panel1.Controls.Add(this.M02);
             this.panel1.Controls.Add(this.M01);
             this.panel1.Controls.Add(this.M00);
-            this.panel1.Location = new System.Drawing.Point(981, 12);
+            this.panel1.Location = new System.Drawing.Point(924, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(137, 146);
+            this.panel1.Size = new System.Drawing.Size(194, 161);
             this.panel1.TabIndex = 2;
             // 
             // M22
             // 
-            this.M22.Location = new System.Drawing.Point(109, 120);
+            this.M22.Location = new System.Drawing.Point(141, 120);
             this.M22.Name = "M22";
-            this.M22.Size = new System.Drawing.Size(24, 20);
+            this.M22.Size = new System.Drawing.Size(50, 20);
             this.M22.TabIndex = 13;
             this.M22.Text = "0";
             // 
             // M21
             // 
-            this.M21.Location = new System.Drawing.Point(54, 120);
+            this.M21.Location = new System.Drawing.Point(71, 120);
             this.M21.Name = "M21";
-            this.M21.Size = new System.Drawing.Size(24, 20);
+            this.M21.Size = new System.Drawing.Size(53, 20);
             this.M21.TabIndex = 12;
             this.M21.Text = "0";
             // 
@@ -102,23 +102,23 @@
             // 
             this.M20.Location = new System.Drawing.Point(3, 120);
             this.M20.Name = "M20";
-            this.M20.Size = new System.Drawing.Size(24, 20);
+            this.M20.Size = new System.Drawing.Size(53, 20);
             this.M20.TabIndex = 11;
             this.M20.Text = "0";
             // 
             // M12
             // 
-            this.M12.Location = new System.Drawing.Point(109, 58);
+            this.M12.Location = new System.Drawing.Point(141, 58);
             this.M12.Name = "M12";
-            this.M12.Size = new System.Drawing.Size(24, 20);
+            this.M12.Size = new System.Drawing.Size(50, 20);
             this.M12.TabIndex = 9;
             this.M12.Text = "0";
             // 
             // M11
             // 
-            this.M11.Location = new System.Drawing.Point(54, 58);
+            this.M11.Location = new System.Drawing.Point(71, 58);
             this.M11.Name = "M11";
-            this.M11.Size = new System.Drawing.Size(24, 20);
+            this.M11.Size = new System.Drawing.Size(53, 20);
             this.M11.TabIndex = 8;
             this.M11.Text = "0";
             // 
@@ -126,23 +126,23 @@
             // 
             this.M10.Location = new System.Drawing.Point(3, 58);
             this.M10.Name = "M10";
-            this.M10.Size = new System.Drawing.Size(24, 20);
+            this.M10.Size = new System.Drawing.Size(53, 20);
             this.M10.TabIndex = 7;
             this.M10.Text = "0";
             // 
             // M02
             // 
-            this.M02.Location = new System.Drawing.Point(109, 3);
+            this.M02.Location = new System.Drawing.Point(141, 3);
             this.M02.Name = "M02";
-            this.M02.Size = new System.Drawing.Size(24, 20);
+            this.M02.Size = new System.Drawing.Size(50, 20);
             this.M02.TabIndex = 5;
             this.M02.Text = "0";
             // 
             // M01
             // 
-            this.M01.Location = new System.Drawing.Point(54, 3);
+            this.M01.Location = new System.Drawing.Point(71, 3);
             this.M01.Name = "M01";
-            this.M01.Size = new System.Drawing.Size(24, 20);
+            this.M01.Size = new System.Drawing.Size(53, 20);
             this.M01.TabIndex = 4;
             this.M01.Text = "0";
             // 
@@ -150,7 +150,7 @@
             // 
             this.M00.Location = new System.Drawing.Point(3, 3);
             this.M00.Name = "M00";
-            this.M00.Size = new System.Drawing.Size(24, 20);
+            this.M00.Size = new System.Drawing.Size(53, 20);
             this.M00.TabIndex = 3;
             this.M00.Text = "0";
             // 
